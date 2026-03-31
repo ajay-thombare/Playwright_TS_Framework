@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import { env } from "@utils/env";
 
 export default defineConfig({
   testDir: "./tests",
@@ -11,7 +12,7 @@ export default defineConfig({
   workers: 1,
   reporter: [["html", { open: "never" }], ["list"]],
   use: {
-    baseURL: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+    baseURL: env.baseUrl,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure"

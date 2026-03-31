@@ -26,16 +26,10 @@ export class LoginPage {
   }
 
   async goto(): Promise<void> {
-    const loginUrl =
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
-
-    await this.page.goto(loginUrl, { waitUntil: "domcontentloaded" });
-    try {
-      await this.usernameInput.waitFor({ state: "visible", timeout: 30_000 });
-    } catch {
-      await this.page.goto(loginUrl, { waitUntil: "domcontentloaded" });
-      await this.usernameInput.waitFor({ state: "visible", timeout: 30_000 });
-    }
+    await this.page.goto("/web/index.php/auth/login", {
+      waitUntil: "domcontentloaded"
+    });
+    await this.usernameInput.waitFor({ state: "visible", timeout: 30_000 });
   }
 
   async login(username: string, password: string): Promise<void> {
