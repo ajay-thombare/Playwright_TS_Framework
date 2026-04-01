@@ -18,6 +18,7 @@ test("valid login", async ({ loginPage }) => {
   );
 
   await expect(loginPage.dashboardHeader).toBeVisible();
+  await expect(loginPage.page).toHaveURL(/\/web\/index\.php\/dashboard/);
 });
 
 test("invalid login", async ({ loginPage }) => {
@@ -45,6 +46,28 @@ test("shows required messages when submitting empty form", async ({ loginPage })
   await loginPage.clickLogin();
 
   await expect(loginPage.requiredFieldMessages).toHaveCount(2);
+});
+
+test("shows password required message when only username is submitted", async ({
+  loginPage
+}) => {
+  await loginPage.goto();
+  await loginPage.usernameInput.fill(loginData.validUser.username);
+  await loginPage.clickLogin();
+
+  await expect(loginPage.requiredFieldMessages).toHaveCount(1);
+  await expect(loginPage.requiredFieldMessages.first()).toHaveText("Required");
+});
+
+test("shows username required message when only password is submitted", async ({
+  loginPage
+}) => {
+  await loginPage.goto();
+  await loginPage.passwordInput.fill(loginData.validUser.password);
+  await loginPage.clickLogin();
+
+  await expect(loginPage.requiredFieldMessages).toHaveCount(1);
+  await expect(loginPage.requiredFieldMessages.first()).toHaveText("Required");
 });
 
 test("navigates to reset password page from forgot password link", async ({
