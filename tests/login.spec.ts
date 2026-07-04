@@ -1,5 +1,6 @@
 import { test, expect } from "@fixtures/testFixture";
 import loginData from "@data/loginData.json";
+import sampleData from "@data/sampleData.json";
 
 test("login page loads with expected UI elements", async ({ loginPage }) => {
   await loginPage.goto();
@@ -8,6 +9,12 @@ test("login page loads with expected UI elements", async ({ loginPage }) => {
   await expect(loginPage.passwordInput).toBeVisible();
   await expect(loginPage.loginButton).toBeVisible();
   await expect(loginPage.forgotPasswordLink).toBeVisible();
+});
+
+test("login page title is OrangeHRM", async ({ loginPage }) => {
+  await loginPage.goto();
+
+  await expect(loginPage.page).toHaveTitle(sampleData.titleText);
 });
 
 test("valid login", async ({ loginPage }) => {
