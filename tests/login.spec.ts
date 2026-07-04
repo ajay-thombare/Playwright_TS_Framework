@@ -20,6 +20,13 @@ test("login page shows Login text", async ({ loginPage }) => {
   await expect(loginPage.loginHeader).toBeVisible();
 });
 
+test("login page shows demo credentials text", async ({ loginPage }) => {
+  await loginPage.goto();
+
+  await expect(loginPage.usernameHintText).toBeVisible();
+  await expect(loginPage.passwordHintText).toBeVisible();
+});
+
 test("login page loads with expected UI elements", async ({ loginPage }) => {
   await loginPage.goto();
 

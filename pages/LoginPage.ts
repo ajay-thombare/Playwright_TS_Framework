@@ -6,6 +6,8 @@ export class LoginPage {
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
   readonly loginHeader: Locator;
+  readonly usernameHintText: Locator;
+  readonly passwordHintText: Locator;
   readonly companyBrandingLogo: Locator;
   readonly errorMessage: Locator;
   readonly requiredFieldMessages: Locator;
@@ -19,6 +21,8 @@ export class LoginPage {
     this.passwordInput = page.locator("input[name='password']");
     this.loginButton = page.locator("button[type='submit']");
     this.loginHeader = page.getByRole("heading", { name: "Login" });
+    this.usernameHintText = page.getByText("Username : Admin", { exact: true });
+    this.passwordHintText = page.getByText("Password : admin123", { exact: true });
     this.companyBrandingLogo = page.getByRole("img", { name: "company-branding" });
     this.errorMessage = page.locator("p.oxd-alert-content-text");
     this.requiredFieldMessages = page.locator("span.oxd-input-field-error-message");
