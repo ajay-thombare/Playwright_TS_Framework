@@ -2,6 +2,18 @@ import { test, expect } from "@fixtures/testFixture";
 import loginData from "@data/loginData.json";
 import sampleData from "@data/sampleData.json";
 
+test("login page title is OrangeHRM", async ({ loginPage }) => {
+  await loginPage.goto();
+
+  await expect(loginPage.page).toHaveTitle(sampleData.titleText);
+});
+
+test("login page logo is visible", async ({ loginPage }) => {
+  await loginPage.goto();
+
+  await expect(loginPage.companyBrandingLogo).toBeVisible();
+});
+
 test("login page loads with expected UI elements", async ({ loginPage }) => {
   await loginPage.goto();
 
@@ -11,17 +23,11 @@ test("login page loads with expected UI elements", async ({ loginPage }) => {
   await expect(loginPage.forgotPasswordLink).toBeVisible();
 });
 
-test("login page title is OrangeHRM", async ({ loginPage }) => {
-  await loginPage.goto();
-
-  await expect(loginPage.page).toHaveTitle(sampleData.titleText);
-});
-
 test("valid login", async ({ loginPage }) => {
   await loginPage.goto();
   await loginPage.login(
     loginData.validUser.username,
-    loginData.validUser.password
+    loginData.validUser.password,
   );
 
   await expect(loginPage.dashboardHeader).toBeVisible();
@@ -32,23 +38,27 @@ test("invalid login", async ({ loginPage }) => {
   await loginPage.goto();
   await loginPage.login(
     loginData.invalidUser.username,
-    loginData.invalidUser.password
+    loginData.invalidUser.password,
   );
 
   await expect(loginPage.errorMessage).toContainText("Invalid credentials");
 });
 
-test("invalid username with valid password shows error", async ({ loginPage }) => {
+test("invalid username with valid password shows error", async ({
+  loginPage,
+}) => {
   await loginPage.goto();
   await loginPage.login(
     loginData.invalidUsername.username,
-    loginData.invalidUsername.password
+    loginData.invalidUsername.password,
   );
 
   await expect(loginPage.errorMessage).toContainText("Invalid credentials");
 });
 
-test("shows required messages when submitting empty form", async ({ loginPage }) => {
+test("shows required messages when submitting empty form", async ({
+  loginPage,
+}) => {
   await loginPage.goto();
   await loginPage.clickLogin();
 
@@ -56,7 +66,7 @@ test("shows required messages when submitting empty form", async ({ loginPage })
 });
 
 test("shows password required message when only username is submitted", async ({
-  loginPage
+  loginPage,
 }) => {
   await loginPage.goto();
   await loginPage.usernameInput.fill(loginData.validUser.username);
@@ -67,7 +77,7 @@ test("shows password required message when only username is submitted", async ({
 });
 
 test("shows username required message when only password is submitted", async ({
-  loginPage
+  loginPage,
 }) => {
   await loginPage.goto();
   await loginPage.passwordInput.fill(loginData.validUser.password);
@@ -78,7 +88,7 @@ test("shows username required message when only password is submitted", async ({
 });
 
 test("navigates to reset password page from forgot password link", async ({
-  loginPage
+  loginPage,
 }) => {
   await loginPage.goto();
   await loginPage.goToResetPassword();
