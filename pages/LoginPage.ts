@@ -18,9 +18,7 @@ export class LoginPage {
     this.loginButton = page.locator("button[type='submit']");
     this.errorMessage = page.locator("p.oxd-alert-content-text");
     this.requiredFieldMessages = page.locator("span.oxd-input-field-error-message");
-    this.forgotPasswordLink = page.getByText("Forgot your password?", {
-      exact: true
-    });
+    this.forgotPasswordLink = page.getByText(/forgot\s+your\s+password\?/i);
     this.resetPasswordHeader = page.getByRole("heading", { name: "Reset Password" });
     this.dashboardHeader = page.getByRole("heading", { name: "Dashboard" });
   }
@@ -40,5 +38,9 @@ export class LoginPage {
 
   async clickLogin(): Promise<void> {
     await this.loginButton.click();
+  }
+
+  async goToResetPassword(): Promise<void> {
+    await this.forgotPasswordLink.click();
   }
 }
