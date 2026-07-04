@@ -14,6 +14,12 @@ test("login page logo is visible", async ({ loginPage }) => {
   await expect(loginPage.companyBrandingLogo).toBeVisible();
 });
 
+test("login page shows Login text", async ({ loginPage }) => {
+  await loginPage.goto();
+
+  await expect(loginPage.loginHeader).toBeVisible();
+});
+
 test("login page loads with expected UI elements", async ({ loginPage }) => {
   await loginPage.goto();
 
