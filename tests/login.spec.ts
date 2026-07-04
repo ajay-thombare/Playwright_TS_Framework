@@ -74,7 +74,7 @@ test("navigates to reset password page from forgot password link", async ({
   loginPage
 }) => {
   await loginPage.goto();
-  await loginPage.forgotPasswordLink.click();
+  await loginPage.goToResetPassword();
 
   await expect(loginPage.resetPasswordHeader).toBeVisible();
   await expect(loginPage.page).toHaveURL(/requestPasswordResetCode/);
