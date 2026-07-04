@@ -7,9 +7,9 @@ export default defineConfig({
   expect: {
     timeout: 10_000
   },
-  fullyParallel: false,
+  fullyParallel: true,
   retries: 0,
-  workers: 1,
+  workers: 4,
   reporter: [["html", { open: "never" }], ["list"]],
   use: {
     baseURL: env.baseUrl,
