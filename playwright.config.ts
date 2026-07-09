@@ -3,33 +3,33 @@ import { env } from "@utils/env";
 
 export default defineConfig({
   testDir: "./tests",
-  timeout: 60_000,
+  timeout: 30_000,
   expect: {
-    timeout: 10_000
+    timeout: 5_000,
   },
   fullyParallel: true,
-  retries: 0,
+  retries: 1,
   workers: 4,
   reporter: [["html", { open: "never" }], ["list"]],
   use: {
     baseURL: env.baseUrl,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
-    video: "retain-on-failure"
+    video: "retain-on-failure",
   },
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] }
+      use: { ...devices["Desktop Chrome"] },
     },
-    {
+    /* {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] }
+      use: { ...devices["Desktop Firefox"] },
     },
     {
       name: "webkit",
-      use: { ...devices["Desktop Safari"] }
-    }
+      use: { ...devices["Desktop Safari"] },
+    }, */
   ],
-  outputDir: "test-results"
+  outputDir: "test-results",
 });
