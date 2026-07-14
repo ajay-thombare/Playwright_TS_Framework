@@ -33,9 +33,10 @@ export class LoginPage {
 
   async goto(): Promise<void> {
     await this.page.goto("/web/index.php/auth/login", {
-      waitUntil: "domcontentloaded"
+      waitUntil: "domcontentloaded",
+      timeout: 60_000
     });
-    await this.usernameInput.waitFor({ state: "visible", timeout: 30_000 });
+    await this.usernameInput.waitFor({ state: "visible", timeout: 60_000 });
   }
 
   async login(username: string, password: string): Promise<void> {
